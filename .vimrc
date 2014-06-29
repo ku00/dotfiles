@@ -21,3 +21,6 @@ NeoBundle 'Gist.vim'
  call neobundle#end()
 
 filetype plugin indent on
+
+set noswapfile
+set nowritebackup

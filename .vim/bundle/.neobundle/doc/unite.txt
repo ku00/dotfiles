@@ -453,6 +453,13 @@ g:unite_source_file_ignore_pattern	*g:unite_source_file_ignore_pattern*
 
 		Refer to autoload/unite/sources/file.vim for the default value.
 
+					*g:unite_source_file_async_command*
+g:unite_source_file_async_command
+		Specify the filelist command and arguments in file/async
+		source.
+
+		The default value is "ls -a".
+
 g:unite_source_bookmark_directory	*g:unite_source_bookmark_directory*
 		Specify the directory where |unite-source-bookmark| writes
 		its bookmarks.
@@ -722,7 +729,7 @@ g:unite_source_menu_menus			*g:unite_source_menu_menus*
 		      \     'description' : 'Test menu3',
 		      \ }
 		let g:unite_source_menu_menus.test3.command_candidates = [
-		      \   ['ruby', 'VimShellInteractive ruby
+		      \   ['ruby', 'VimShellInteractive ruby'],
 		      \   ['python', 'VimShellInteractive python'],
 		      \ ]
 
@@ -816,7 +823,6 @@ g:unite_kind_cdable_cd_command
 				*g:unite_kind_openable_cd_command*
 g:unite_kind_openable_cd_command
 		Specify the Vim command for cd action.
-		This command must interpret |`=|.
 
 		The default value is "cd".
 
@@ -825,7 +831,6 @@ g:unite_kind_cdable_lcd_command
 				*g:unite_kind_openable_lcd_command*
 g:unite_kind_openable_lcd_command
 		Specify the Vim command for lcd action.
-		This command must interpret |`=|.
 
 		The default value is "lcd".
 
@@ -920,7 +925,7 @@ g:unite_abbr_highlight				*g:unite_abbr_highlight*
 
 g:unite_cursor_line_time		*g:unite_cursor_line_time*
 		Specify the cursor line highlight time.
-		If you scrolls cursor quickly less than it, unite will skip
+		If you scroll cursor quickly less than it, unite will skip
 		cursor line highlight.
 		If it is "0.0", this feature will be disabled.
 		Note: It is deprecated variable.  Please use
@@ -1024,11 +1029,11 @@ Normal mode mappings.
 		are on the top.
 
 <Plug>(unite_skip_cursor_down)		*<Plug>(unite_skip_cursor_down)*
-		Goes to the next line.  But skips unmatched candidates.
+		Goes to the next line, but skips unmatched candidates.
 		Goes up to top when you are on the bottom.
 
 <Plug>(unite_skip_cursor_up)			*<Plug>(unite_skip_cursor_up)*
-		Goes to the previous line.  But skips unmatched candidates.
+		Goes to the previous line, but skips unmatched candidates.
 		Goes down to the bottom when you are on the top.
 
 				*<Plug>(unite_quick_match_default_action)*
@@ -1046,15 +1051,12 @@ Normal mode mappings.
 		Narrows with inputting directory name.
 
 <Plug>(unite_delete_backward_path)	*<Plug>(unite_delete_backward_path)*
-		Deletes a path upward.  Refer to
+		Deletes a narrowing text or a path upward.  Refer to
 		|i_<Plug>(unite_delete_backward_path)|.
 
 				*<Plug>(unite_toggle_transpose_window)*
 <Plug>(unite_toggle_transpose_window)
 		Change the unite buffer's split direction.
-
-<Plug>(unite_narrowing_path)			*<Plug>(unite_narrowing_path)*
-		Narrowing candidates by candidate path (or word).
 
 				*<Plug>(unite_narrowing_input_history)*
 <Plug>(unite_narrowing_input_history)
@@ -1208,7 +1210,7 @@ A		|<Plug>(unite_append_end)|
 q		|<Plug>(unite_exit)|
 <C-g>		|<Plug>(unite_exit)|
 Q		|<Plug>(unite_all_exit)|
-g<C-g>		|<Plug>(unite_exit)|
+g<C-g>		|<Plug>(unite_all_exit)|
 <C-r>		|<Plug>(unite_restart)|
 <Space>		|<Plug>(unite_toggle_mark_current_candidate)|
 <S-Space>	|<Plug>(unite_toggle_mark_current_candidate_up)|
@@ -1411,7 +1413,7 @@ unite#custom#profile({profile-name}, {option-name}, {value})
 		Set {profile-name} specialized {option-name} to {value}.
 		Note: If you use single source in unite.vim commands with
 		omitting profile name and buffer name, "source/{source-name}"
-		is used.  So you can define a source specific profile.
+		is used.  Thus, you can define a source-specific profile.
 
 		The options below are available:
 
@@ -1497,7 +1499,7 @@ unite#custom#profile({profile-name}, {option-name}, {value})
 		default context.
 		Note: If you want to change default context, you should use
 		"default" profile name.
-		Valid key context is in |unite-options|.  But "-" is
+		Valid key context is in |unite-options|.  However, "-" is
 		substituted to "_", and "-" prefix is removed.
 
 		Example:
@@ -1547,7 +1549,7 @@ unite#custom#action({kind}, {name}, {action})
 
 		  let dir = isdirectory(a:candidate.word) ?
 		  \    a:candidate.word : fnamemodify(a:candidate.word, ':p:h')
-		  execute g:unite_kind_openable_lcd_command '`=dir`'
+		  execute g:unite_kind_openable_lcd_command fnameescape(dir)
 		endfunction
 		call unite#custom#action('file,buffer', 'tabopen', my_tabopen)
 		unlet my_tabopen
@@ -1719,14 +1721,18 @@ the context dictionary.
 						*unite-options-profile-name*
 		-profile-name={profile-name}		(String)
 		Specify a profile name.  The default profile name is the same
-		as the buffer name.  But if you use a single source and omit
-		the buffer name, "source/{source-name}" or "default" is used.
-		This way you can define source specific profiles.
+		as the buffer name.  However, if you use a single source and
+		omit the buffer name, "source/{source-name}" or "default" is
+		used.  This way you can define source-specific profiles.
 		Note: https://github.com/Shougo/unite.vim/issues/277
 
 						*unite-options-input*
 		-input={input-text}
 		Specify an initial narrowing text.  The default value is ''.
+
+						*unite-options-path*
+		-path={input-text}
+		Specify an initial narrowing path.  The default value is ''.
 
 						*unite-options-prompt*
 		-prompt={prompt-text}
@@ -1821,6 +1827,10 @@ the context dictionary.
 						*unite-options-auto-resize*
 		-auto-resize
 		Auto resize unite buffer height by candidates number.
+
+						*unite-options-no-resize*
+		-no-resize
+		Do not resize the unite buffer after opening it.
 
 						*unite-options-toggle*
 		-toggle
@@ -1943,7 +1953,7 @@ the context dictionary.
 						*unite-options-cursor-line-time*
 		-cursor-line-time={icon-text}
 		Specify the cursor line highlight time.
-		If you scrolls cursor quickly less than it, unite will skip
+		If you scroll cursor quickly less than it, unite will skip
 		cursor line highlight.
 		If it is "0.0", this feature will be disabled.
 
@@ -1964,6 +1974,9 @@ file/new	Nominates a new input file as a candidate.
 
 		Source arguments:
 		1. the file/directory path.
+
+						*unite-source-file/async*
+file/async	Similar to |unite-source-file|, but get files asynchronously.
 
 						*unite-source-file_rec*
 file_rec	Gather files recursive and nominates all directory or file
@@ -2100,7 +2113,7 @@ output		Nominates executed Vim command as candidates.
 
 		Source arguments:
 		1. Vim command.
-		2~. command args (but you cannot use "!" by itself)
+		2. command args (but you cannot use "!" by itself)
 
 		If the last argument is "!", it prints by dummy candidates.
 		This behavior is useful for output message.
@@ -2309,12 +2322,26 @@ openable	An interface that can open.  This doesn't require any keys,
 						*unite-kind-cdable*
 cdable		An interface that can change the working directory.
 
-			action__directory	(String)	(Required)
+			action__directory	(String)	(Optional)
 				The target directory.
 
+						*unite-kind-file_base*
+file_base	An interface for file operations.
+
+			action__path		(String)	(Required)
+				The path of the target directory.
+
+						*unite-kind-file_vimfiler_base*
+file_vimfiler_base
+		An interface for vimfiler file operations.
+
+			action__path		(String)	(Required)
+				The path of the target directory.
+
 						*unite-kind-file*
-file		An interface for files.  This kind inherits cdable, uri
-		and openable, so this requires kinds that they require.
+file		An interface for files.  This kind inherits cdable, file_base,
+		file_vimfiler_base, uri and openable, so this requires kinds
+		that they require.
 
 			action__path		(String)	(Required)
 				The path of the target directory.
@@ -2575,7 +2602,7 @@ converter_nothing
 converter_relative_word
 		A converter which converts a candidate's word into a
 		corresponding relative path.
-		word can be used by matcher to narrow down the candidates and
+		Word can be used by matcher to narrow down the candidates and
 		must be set in precedence of the matcher.
 		If context information contains source__directory, this
 		converter uses it as the base path in relative path
@@ -2834,7 +2861,7 @@ name			String		(Required)
 			    /
 			    -    (except the first character)
 
-			    Good: "buffer" , "file_mru", "view/git"
+			    Good: "buffer", "file_mru", "view/git"
 			    Bad:  "BadOne", "!@#$%^&*()_[]{}-|", ""
 
 				*unite-source-attribute-gather_candidates*
@@ -3158,7 +3185,8 @@ NOTATION					*unite-notation*
 
 			abbr			(String)	(Optional)
 				String Displayed in unite buffer.
-				If it is omit, word attribute is used instead.
+				If it is omitted, word attribute is used
+				instead.
 				The attribute is not used for matcher.
 
 			source			(String)	(Optional)
@@ -3167,7 +3195,7 @@ NOTATION					*unite-notation*
 
 			kind			(String/List)	(Optional)
 				The candidate kind name.
-				If it is omit, "common" is used.
+				If it is omitted, "common" is used.
 				Kind name list is acceptable.
 				Ex: ["file", "directory"]
 				If you use list, you do not have to define the
@@ -3236,15 +3264,15 @@ name			String		(Required)
 			    /
 			    -    (except the first character)
 
-			    Good: "buffer" , "file_mru", "view/git"
+			    Good: "buffer", "file_mru", "view/git"
 			    Bad:  "BadOne", "!@#$%^&*()_[]{}-|", ""
 
 					*unite-kind-attribute-default_action*
 default_action		String		(Required)
 			Specify default action name when executing
 			|<Plug>(unite_do_default_action)|.  If this attribute
-			is omitted, an error occurs.  But this hack is used
-			in parent only actions.
+			is omitted, an error occurs.  However, this hack is used
+			only in parent actions.
 
 					*unite-kind-attribute-action_table*
 action_table		Dictionary		(Required)
@@ -3418,7 +3446,7 @@ FAQ						*unite-faq*
 
 Q: I want to delete files in unite buffer.
 
-A: You can use the setting below.  But this setting is dangerous.  You may delete
+A: You can use the setting below; however, this setting is dangerous.  You may delete
 files by mistake.
 >
 	call unite#custom#alias('file', 'delete', 'vimfiler__delete')
@@ -3443,7 +3471,10 @@ Q: How to make direct action (or choose action menu) to current file or given
 path?
 
 A: >
-	call unite#do_candidates_action('some_action',
+	call unite#action#do_candidates('some_action',
+	\  unite#get_candidates([['file', expand('%')]]))
+
+	call unite#mappings#_choose_action(
 	\  unite#get_candidates([['file', expand('%')]]))
 <
 Q: unite.vim statusline conflicts with powerline.
@@ -3455,7 +3486,7 @@ A: You must set |g:unite_force_overwrite_statusline| to 0.
 	let g:unite_force_overwrite_statusline = 0
 <
 
-And you must install the following custom theme for powerline.
+Also, you must install the following custom theme for powerline.
 
 For powerline:
 
@@ -3493,7 +3524,7 @@ A: Yes you can use |unite-filter-matcher_fuzzy|.
 	\ 'matchers', 'matcher_fuzzy')
 <
 Note: Fuzzy matcher does not sort candidates.  If you want to sort by rank,
-you can use "sorter_rank" or "sorter_selecta". But it is slow.
+you can use "sorter_rank" or "sorter_selecta"; however, it is slow.
 >
 	call unite#filters#sorter_default#use(['sorter_rank'])
 <
@@ -3522,10 +3553,9 @@ Q: Unite adds unite buffer to jumplist automatically.
 A: Sorry, but it is hard to fix. You should use |unite-source-jump| instead of
 <C-i>/<C-o> mappings. It ignores unite buffer.
 
-Note: In this issue, experimental settings are suggested. But I don't
-recommend them.
+Note: In this issue, experimental settings are suggested.
 https://github.com/Shougo/unite.vim/issues/278
-Because:
+However, I don't reccomend them because:
 1. Unite buffer name may be changed in a later version.
 2. You cannot use the |:UniteResume| feature.
 3. It has side effects. I cannot guarantee it works.
@@ -3576,15 +3606,16 @@ https://github.com/Shougo/unite.vim/issues/370
 https://github.com/Shougo/unite.vim/issues/459
 
 A: It is a feature.  cf: |g:unite_source_rec_max_cache_files|.
-And the default max candidates are limited. You can customize it by
+Also, the default max candidates are limited. You can customize it by
 |unite#custom#source()|. >
 	let g:unite_source_rec_max_cache_files = 0
 	call unite#custom#source('file_rec,file_rec/async',
 	\ 'max_candidates', 0)
 
-And you must clear previous cache in file_rec sources and wait until the cache
+Also, you must clear previous cache in file_rec sources and wait until the cache
 is completed ("Directory traverse was completed" message is showed).
-In large files directory, making the cache is slow. So I don't recommend it.
+In a directory including large file, making the cache is slow. Thus, I don't
+recommend it.
 To clear cache, you must execute |<Plug>(unite_redraw)| in unite
 buffer (the default is mapped to <C-l>).
 
@@ -3618,7 +3649,7 @@ A: It is a feature. See |g:unite_matcher_fuzzy_max_input_length|.
 
 Q: I don't want to get input lag like ctrlp.vim.
 
-A: You can use |unite-options-sync|. But unite.vim may block your Vim for a
+A: You can use |unite-options-sync|, but unite.vim may block your Vim for a
 long time.
 
 Q: Why did you split MRU sources?

@@ -1,71 +1,26 @@
-set nocompatible
-filetype plugin indent off
+" pluginを読み込む
+source ~/dotfiles/.vimrc.bundle
 
-if has('vim_starting')
-  set runtimepath+=~/dotfiles/.vim/bundle/neobundle.vim/
-  call neobundle#rc(expand('~/dotfiles/.vim/bundle/'))
-endif
+" 基本設定
+source ~/dotfiles/.vimrc.basic
 
-call neobundle#begin(expand('~/dotfiles/.vim/bundle/'))
+" StatusLine設定
+source ~/dotfiles/.vimrc.statusline
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+" インデント設定
+source ~/dotfiles/.vimrc.indent
 
-" My Bundles here:
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'The-NERD-tree'
-NeoBundle 'The-NERD-Commenter'
-NeoBundle 'Gist.vim'
-NeoBundle 'altercation/vim-colors-solarized'
+" 表示関連
+source ~/dotfiles/.vimrc.apperance
 
-call neobundle#end()
+" 補完関連
+source ~/dotfiles/.vimrc.completion
 
+" 検索関連
+source ~/dotfiles/.vimrc.indent
 
-filetype plugin indent on
+" 編集関連
+source ~/dotfiles/.vimrc.apperance
 
-" display
-" ----------------------
-set number
-set ruler
-set title
-set cmdheight=2
-set laststatus=2
-
-" edit
-" ----------------------
-set autoindent
-set smartindent
-set expandtab
-set wildmenu
-set hidden
-set showcmd
-set nostartofline
-
-" search
-" ----------------------
-set ignorecase
-set smartcase
-set hlsearch
-
-" baskup
-" ----------------------
-set noswapfile
-set nowritebackup
-
-
-" Plugin setting
-" ----------------------
-
-" NERDTree
-" ----------------------
-let NERDTreeShowHidden = 1
-
-" VimColorsSolarized
-" ----------------------
-set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
-syntax enable
-
-
+" プラグインに依存する設定
+source ~/dotfiles/.vimrc.plugins_setting

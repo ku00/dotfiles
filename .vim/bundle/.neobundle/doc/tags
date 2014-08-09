@@ -108,7 +108,6 @@
 <Plug>(unite_loop_cursor_up)	unite.txt	/*<Plug>(unite_loop_cursor_up)*
 <Plug>(unite_narrowing_dot)	unite.txt	/*<Plug>(unite_narrowing_dot)*
 <Plug>(unite_narrowing_input_history)	unite.txt	/*<Plug>(unite_narrowing_input_history)*
-<Plug>(unite_narrowing_path)	unite.txt	/*<Plug>(unite_narrowing_path)*
 <Plug>(unite_new_candidate)	unite.txt	/*<Plug>(unite_new_candidate)*
 <Plug>(unite_print_candidate)	unite.txt	/*<Plug>(unite_print_candidate)*
 <Plug>(unite_print_message_log)	unite.txt	/*<Plug>(unite_print_message_log)*
@@ -271,6 +270,7 @@ g:unite_quick_match_table	unite.txt	/*g:unite_quick_match_table*
 g:unite_source_alias_aliases	unite.txt	/*g:unite_source_alias_aliases*
 g:unite_source_bookmark_directory	unite.txt	/*g:unite_source_bookmark_directory*
 g:unite_source_buffer_time_format	unite.txt	/*g:unite_source_buffer_time_format*
+g:unite_source_file_async_command	unite.txt	/*g:unite_source_file_async_command*
 g:unite_source_file_ignore_pattern	unite.txt	/*g:unite_source_file_ignore_pattern*
 g:unite_source_file_rec_async_command	unite.txt	/*g:unite_source_file_rec_async_command*
 g:unite_source_file_rec_ignore_pattern	unite.txt	/*g:unite_source_file_rec_ignore_pattern*
@@ -389,6 +389,7 @@ neobundle-options-augroup	neobundle.txt	/*neobundle-options-augroup*
 neobundle-options-autoload	neobundle.txt	/*neobundle-options-autoload*
 neobundle-options-base_path	neobundle.txt	/*neobundle-options-base_path*
 neobundle-options-build	neobundle.txt	/*neobundle-options-build*
+neobundle-options-build_commands	neobundle.txt	/*neobundle-options-build_commands*
 neobundle-options-default	neobundle.txt	/*neobundle-options-default*
 neobundle-options-depends	neobundle.txt	/*neobundle-options-depends*
 neobundle-options-directory	neobundle.txt	/*neobundle-options-directory*
@@ -567,6 +568,8 @@ unite-kind-common	unite.txt	/*unite-kind-common*
 unite-kind-completion	unite.txt	/*unite-kind-completion*
 unite-kind-directory	unite.txt	/*unite-kind-directory*
 unite-kind-file	unite.txt	/*unite-kind-file*
+unite-kind-file_base	unite.txt	/*unite-kind-file_base*
+unite-kind-file_vimfiler_base	unite.txt	/*unite-kind-file_vimfiler_base*
 unite-kind-guicmd	unite.txt	/*unite-kind-guicmd*
 unite-kind-jump_list	unite.txt	/*unite-kind-jump_list*
 unite-kind-neobundle	neobundle.txt	/*unite-kind-neobundle*
@@ -612,7 +615,9 @@ unite-options-no-cursor-line	unite.txt	/*unite-options-no-cursor-line*
 unite-options-no-empty	unite.txt	/*unite-options-no-empty*
 unite-options-no-focus	unite.txt	/*unite-options-no-focus*
 unite-options-no-quit	unite.txt	/*unite-options-no-quit*
+unite-options-no-resize	unite.txt	/*unite-options-no-resize*
 unite-options-no-split	unite.txt	/*unite-options-no-split*
+unite-options-path	unite.txt	/*unite-options-path*
 unite-options-profile-name	unite.txt	/*unite-options-profile-name*
 unite-options-prompt	unite.txt	/*unite-options-prompt*
 unite-options-prompt-direction	unite.txt	/*unite-options-prompt-direction*
@@ -673,6 +678,7 @@ unite-source-command	unite.txt	/*unite-source-command*
 unite-source-directory	unite.txt	/*unite-source-directory*
 unite-source-directory/new	unite.txt	/*unite-source-directory\/new*
 unite-source-file	unite.txt	/*unite-source-file*
+unite-source-file/async	unite.txt	/*unite-source-file\/async*
 unite-source-file/new	unite.txt	/*unite-source-file\/new*
 unite-source-file_point	unite.txt	/*unite-source-file_point*
 unite-source-file_rec	unite.txt	/*unite-source-file_rec*

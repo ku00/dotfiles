@@ -1,0 +1,3 @@
+set laststatus=2    " 常にステースタラインを表示
+set ruler           " カーソルが何行目の何列目に置かれているかを表示
+set number          " 行番号を表示

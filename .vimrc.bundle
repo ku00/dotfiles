@@ -1,4 +1,4 @@
-filetype indent off
+filetype plugin indent off
 
 if has('vim_starting')
   set runtimepath+=~/dotfiles/.vim/bundle/neobundle.vim/
@@ -20,4 +20,4 @@ NeoBundle 'altercation/vim-colors-solarized'
 
 call neobundle#end()
 
-
+filetype plugin indent on

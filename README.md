@@ -1,2 +1,5 @@
-dotfiles
-========
+# dotfiles
+
+```bash
+./setup.sh
+```

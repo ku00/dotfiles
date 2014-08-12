@@ -1,5 +1,8 @@
 # dotfiles
 
+# Setup
+
 ```bash
-./setup.sh
+$ git clone git@github.com:takuminnnn/dotfiles.git
+$ ./setup.sh
 ```

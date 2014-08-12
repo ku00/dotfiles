@@ -267,6 +267,7 @@ g:unite_matcher_fuzzy_max_input_length	unite.txt	/*g:unite_matcher_fuzzy_max_inp
 g:unite_no_default_keymappings	unite.txt	/*g:unite_no_default_keymappings*
 g:unite_prompt	unite.txt	/*g:unite_prompt*
 g:unite_quick_match_table	unite.txt	/*g:unite_quick_match_table*
+g:unite_redraw_hold_candidates	unite.txt	/*g:unite_redraw_hold_candidates*
 g:unite_source_alias_aliases	unite.txt	/*g:unite_source_alias_aliases*
 g:unite_source_bookmark_directory	unite.txt	/*g:unite_source_bookmark_directory*
 g:unite_source_buffer_time_format	unite.txt	/*g:unite_source_buffer_time_format*

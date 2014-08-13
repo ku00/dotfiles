@@ -7,6 +7,8 @@ alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
 alias vi=vim
 
 # git
-alias ga="git add ."
-alias gc="git commit"
+alias g="git"
+alias ga="git add"
+alias gcm="git commit"
+alias gch="git checkout"
 alias gs="git status -s -b"

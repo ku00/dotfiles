@@ -97,3 +97,16 @@ fi
 # Alias
 
 [ -f ~/dotfiles/.zshrc.alias ] && source ~/dotfiles/.zshrc.alias
+
+case "${OSTYPE}" in
+# MacOSX
+ darwin*)
+     # ここに設定
+     [ -f ~/dotfiles/.zshrc.osx ] && source ~/dotfiles/.zshrc.osx
+     ;;
+ # Linux
+ linux*)
+     # ここに設定
+     [ -f ~/dotfiles/.zshrc.linux ] && source ~/dotfiles/.zshrc.linux
+     ;;
+ esac

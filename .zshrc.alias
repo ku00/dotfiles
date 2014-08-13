@@ -2,10 +2,6 @@
 alias ls="ls -G"
 alias la="ls -a"
 
-# vim
-alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
-alias vi=vim
-
 # git
 alias g="git"
 alias ga="git add"

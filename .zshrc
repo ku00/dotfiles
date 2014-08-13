@@ -1,4 +1,4 @@
-# 環境変数
+# Environment variable configuration
 
 ## SSHで接続した先で日本語が使えるようになる
 export LC_CTYPE=en_US.UTF-8
@@ -12,7 +12,7 @@ export PAGER=/usr/local/bin/vimpager
 export MANPAGER=/usr/local/bin/vimpager
 
 
-# zshのオプション
+# Option
 
 ## 補完機能の強化
 autoload -U compinit
@@ -46,7 +46,7 @@ setopt no_tify
 setopt hist_ignore_dups
 
 
-# パス
+# Path
 
 ## 重複する要素を自動的に削除
 typeset -U path cdpath fpath manpath
@@ -59,7 +59,7 @@ path=(
 )
 
 
-# プロンプト
+# Prompt
 
 autoload -U promptinit; promptinit
 autoload -Uz colors; colors
@@ -94,9 +94,6 @@ if [ -n "$LS_COLORS" ]; then
 fi
 
 
-# エイリアス
+# Alias
 
-# ls
-alias ls="ls -G"
-alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
-alias vi=vim
+[ -f ~/dotfiles/.zshrc.alias ] && source ~/dotfiles/.zshrc.alias

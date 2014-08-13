@@ -98,3 +98,5 @@ fi
 
 # ls
 alias ls="ls -G"
+alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
+alias vi=vim

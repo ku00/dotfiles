@@ -1,3 +1,4 @@
+set noundofile                    " アンドゥファイルを作らない
 set nobackup                      " バックアップ取らない
 set autoread                      " 他で書き換えられたら自動で読み直す
 set noswapfile                    " スワップファイル作らない

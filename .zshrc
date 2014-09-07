@@ -58,6 +58,10 @@ path=(
     $path
 )
 
+## rbenv
+PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 
 # Prompt
 

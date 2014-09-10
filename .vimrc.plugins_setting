@@ -1,4 +1,16 @@
 " NERDTree
+" <C-e>でNERDTreeをオンオフ
+nmap <silent> <C-e>      :NERDTreeToggle<CR>
+vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+omap <silent> <C-e>      :NERDTreeToggle<CR>
+imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
+" 引数なしでvimを開いたらNERDTreeを起動、
+" 引数ありならNERDTreeは起動しない、引数で渡されたファイルを開く
+autocmd vimenter * if !argc() | NERDTree | endif
+" 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" 隠しファイルを表示する
 let NERDTreeShowHidden=1
 
 " color scheme

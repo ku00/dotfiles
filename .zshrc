@@ -62,6 +62,9 @@ path=(
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+## npm
+export PATH=/usr/local/share/npm/bin:$PATH
+export NODE_PATH=/usr/local/share/npm/lib/node_modules
 
 # Prompt
 

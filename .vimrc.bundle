@@ -1,11 +1,11 @@
 filetype plugin indent off
 
 if has('vim_starting')
-  set runtimepath+=~/dotfiles/.vim/bundle/neobundle.vim/
-  call neobundle#rc(expand('~/dotfiles/.vim/bundle/'))
+  set nocompatible
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-call neobundle#begin(expand('~/dotfiles/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -24,7 +24,7 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'The-NERD-tree'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'Gist.vim'
-NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'tomasr/molokai'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 
 call neobundle#end()

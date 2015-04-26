@@ -1,0 +1,3 @@
+[submodule "Prezto"]
+    path = Prezto
+    url = https://github.com/sorin-ionescu/prezto.git

@@ -1,16 +1,4 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# Customize to your needs...
+# Environment variable configuration
 
 ## SSHで接続した先で日本語が使えるようになる
 export LC_CTYPE=en_US.UTF-8
@@ -56,17 +44,19 @@ setopt no_tify
 ## 直前と同じコマンドをヒストリに追加しない
 setopt hist_ignore_dups
 
+
 # Path
 
 ## 重複する要素を自動的に削除
 typeset -U path cdpath fpath manpath
 
 path=(
-  $HOME/bin(N-/)
-  /usr/local/bin(N-/)
-  /usr/local/sbin(N-/)
-  $path
+    $HOME/bin(N-/)
+    /usr/local/bin(N-/)
+    /usr/local/sbin(N-/)
+    $path
 )
+
 ## rbenv
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -74,6 +64,41 @@ eval "$(rbenv init -)"
 ## npm
 export PATH=/usr/local/share/npm/bin:$PATH
 export NODE_PATH=/usr/local/share/npm/lib/node_modules
+
+# Prompt
+
+autoload -U promptinit; promptinit
+autoload -Uz colors; colors
+autoload -Uz is-at-least
+
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' max-exports 6 # formatに入る変数の最大数
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' formats '%b@%r' '%c' '%u'
+zstyle ':vcs_info:git:*' actionformats '%b@%r|%a' '%c' '%u'
+setopt prompt_subst
+function vcs_echo {
+    local st branch color
+    STY= LANG=en_US.UTF-8 vcs_info
+    st=`git status 2> /dev/null`
+    if [[ -z "$st" ]]; then return; fi
+    branch="$vcs_info_msg_0_"
+    if   [[ -n "$vcs_info_msg_1_" ]]; then color=${fg[green]} #staged
+    elif [[ -n "$vcs_info_msg_2_" ]]; then color=${fg[red]} #unstaged
+    elif [[ -n `echo "$st" | grep "^Untracked"` ]]; then color=${fg[blue]} # untracked
+    else color=${fg[cyan]}
+    fi
+    echo "%{$color%}(%{$branch%})%{$reset_color%}" | sed -e s/@/"%F{yellow}@%f%{$color%}"/
+}
+PROMPT='
+%F{yellow}[%~]%f `vcs_echo`
+%(?.$.%F{red}$%f) '
+
+if [ -n "$LS_COLORS" ]; then
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+fi
+
 
 # Alias
 
